@@ -5,7 +5,7 @@ import { ListItem } from './listItem';
 
 const MenuStyled = styled.main`
     section{
-        margin-top: 60px;
+        //margin-top: 0px;
         h2{
             text-align: center;
             font-size: 36px;

@@ -27,6 +27,7 @@ const Item = styled.li`
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         transition: .3s;
         &:hover{
             opacity: 0;
@@ -40,6 +41,7 @@ export const ListItem = ({ itemList }) => (
             <Item key={item.id} img={item.img}>
                 <div class="mask">
                     <span>{item.name}</span>
+                    <span>{item.price.toLocaleString('ru-RU',{style: 'currency', currency: 'RUB'})}</span> 
                 </div>
             </Item>
         ))}
