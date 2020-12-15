@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import logoImg from '../img/dna.svg';
+import userIcon from '../img/sign.svg';
 
 const active = '#eee';
 
 const headerStyles = {
     width: '100%',
+    position: 'fixed',
     backgroundColor: '#3b3b3b',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: '60px'
 }
 
 const NavBarStyled = styled.div`
@@ -39,6 +42,8 @@ const LogoStyled = styled.img`
 `;
 
 const LoginButton = styled.button`
+    display: flex;
+    align-items: center;
     border: 1px solid ${active};
     color: ${active};
     background-color: transparent;
@@ -46,11 +51,16 @@ const LoginButton = styled.button`
     padding: 5px 20px;
     font-size: 18px;
     font-family: 'Raleway', sans-serif;
-    transition .3s;
+    transition: .3s;
     outline: none;
     &:hover{
         background-color: ${active};
         color: #3b3b3b;
+    }
+    img{
+        height: 15px;
+        width: 15px;
+        padding-left: 3px;
     }
 `;
 
@@ -61,7 +71,7 @@ export const NavBar = () => (
                 <LogoStyled src={logoImg} alt="logo"/>
                 <h1>STATION 21</h1>
             </LogoLink>
-            <LoginButton>Log in</LoginButton>
+            <LoginButton>Log in <img src={userIcon} alt="log in"/></LoginButton>
         </NavBarStyled>
     </header>
 )

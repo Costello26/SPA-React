@@ -3,6 +3,7 @@
 import './App.css';
 import { createGlobalStyle } from 'styled-components';
 import { NavBar } from './Components/navbar';
+import { Menu } from './Components/menu';
 
 const GlobalStyle = createGlobalStyle`
       html{
@@ -17,6 +18,12 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Raleway' , sans-serif;
         font-size: 14px;
         color: #000;
+      }
+      .container{
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px 0;
       }
       a{
         color: inherit;
@@ -40,6 +47,7 @@ function App() {
     <>
       <GlobalStyle/>
       <NavBar/>
+      <Menu/> 
       <div className="App">
         <h1>Hello World!</h1>
       </div>
