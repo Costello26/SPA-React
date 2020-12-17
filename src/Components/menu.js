@@ -14,15 +14,15 @@ const MenuStyled = styled.main`
     }
 `;
 
-export const Menu = () => (
+export const Menu = ({ setOpenItem }) => (
     <MenuStyled className="container">
         <section>
             <h2>Item List heading</h2>
-            <ListItem itemList={dbMenu.burger}/>
+            <ListItem itemList={dbMenu.burger} setOpenItem={setOpenItem}/>
         </section>
         <section>
             <h2>Second Item List heading</h2>
-            <ListItem itemList={dbMenu.other}/>
+            <ListItem itemList={dbMenu.other} setOpenItem={setOpenItem}/>
         </section>
     </MenuStyled>
 )

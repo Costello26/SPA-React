@@ -18,7 +18,7 @@ const BannerBody = styled.div`
 
 export const TopBanner = () => (
     <BannerBody Background="/topbanner/banner.png">
-        <div class="mask">
+        <div className="mask">
             <h1>STATION 21</h1>
         </div>
     </BannerBody>
