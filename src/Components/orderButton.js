@@ -10,7 +10,8 @@ const OrderButton = styled.a`
     border: 2px solid #000;
     transition: .3s;
     text-transform: uppercase;
-    font-size: .6em;
+    text-align: center;
+    font-size: .6rem;
     letter-spacing: 2px;
     &:hover{
         color: #000;
