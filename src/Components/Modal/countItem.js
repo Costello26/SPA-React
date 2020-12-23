@@ -7,20 +7,29 @@ const CountWrap = styled.div`
     flex-direction: row;
     padding: 15px;
     justify-content: center;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
 `;
 const Button = styled.input`
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: #000;
     color: #fff;
     cursor: pointer;
     border: none;
+    font-size: 1em;
 `;
 
 const Quantity = styled.input`
     width: 15%;
     font-family: 'Bebas Neue', sans-serif;
     text-align: center;
+    outline: none;
+    font-size: 1em;
 `;
 
 export function CountItem({count, setCount, onChange}){

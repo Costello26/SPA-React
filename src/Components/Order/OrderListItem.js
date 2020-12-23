@@ -18,6 +18,7 @@ const TrashButton = styled.button`
 const ItemStyled = styled.li`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
@@ -28,7 +29,7 @@ const PriceStyled = styled.span`
 `;
 
 const NameStyle = styled.span`
-    width: 50%;
+    width: 30%;
 `;
 
 const Quantity = styled.span`
@@ -36,14 +37,21 @@ const Quantity = styled.span`
     text-align: center;
 `;
 
+const Toppings = styled.div`
+    width: 100%;
+    font-size: 14px;
+`;
+
 export const OrderListItem = ({ order }) => {
-    
+    const toppings = order.topping.filter(item => item.checked).map(item => ' ' + item.name ).join(', '); 
+    console.log( order.topping.filter(item => item.checked));
     return(
         <ItemStyled>
             <NameStyle>{order.name}</NameStyle>
             <Quantity>{order.count}</Quantity>
             <PriceStyled>{toLocal(totalPriceItem(order))}</PriceStyled>
             <TrashButton/>
+            {toppings && <Toppings>Топпинги: {toppings}</Toppings>}
         </ItemStyled>
     )
 };

@@ -5,6 +5,8 @@ import { CountItem } from './countItem';
 import { useCount } from '../Hooks/useCount';
 import { toLocal } from "../Functions/ToLocal";
 import { totalPriceItem } from '../Functions/totalPriceItem';
+import { Toppings } from '../Modal/toppings';
+import { useToppings } from '../Hooks/useToppings';
 
 const Modal = styled.div`
     position: fixed;
@@ -44,11 +46,11 @@ const Price = styled.span`
     padding: 15px;
     font-family: 'Bebas Neue',sans-serif;
 `;
-//export const totalPriceItem = order => order.price * order.count;
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const counter = useCount();
+    const toppings = useToppings(openItem);
 
     const closeModal = e => {
         if(e.target.id === 'Overlay'){
@@ -58,7 +60,8 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const order = {
         ...openItem,
-        count: counter.count
+        count: counter.count,
+        topping: toppings.toppings 
     }
 
     const addToOrder = () => {
@@ -78,6 +81,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
                 <Banner img={openItem.img}></Banner>
                 <BannerContent>
                     <h2>{openItem.name}</h2>
+                    {openItem.toppings && <Toppings {...toppings}></Toppings> }
                     <Price>{toLocal(openItem.price)}</Price>
                     <CountItem {...counter}></CountItem>
                     <Button onClick={addToOrder} text="В корзину"></Button>
