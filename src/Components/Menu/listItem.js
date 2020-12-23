@@ -12,9 +12,10 @@ const List = styled.ul`
 const Item = styled.li`
     width: 30%;
     max-width: 48%;
-    height: 155px;
+    height: 185px;
     margin: 10px;
     background: ${(props) => `url(${props.img});`} center center no-repeat;
+    background-size: cover;
     color: #fff;
     cursor: pointer;
     font-family: 'Bebas Neue', sans-serif;

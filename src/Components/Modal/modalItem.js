@@ -4,6 +4,7 @@ import { Button } from '../Order/orderButton';
 import { CountItem } from './countItem';
 import { useCount } from '../Hooks/useCount';
 import { toLocal } from "../Functions/ToLocal";
+import { totalPriceItem } from '../Functions/totalPriceItem';
 
 const Modal = styled.div`
     position: fixed;
@@ -43,7 +44,7 @@ const Price = styled.span`
     padding: 15px;
     font-family: 'Bebas Neue',sans-serif;
 `;
-export const totalPriceItem = order => order.price * order.count;
+//export const totalPriceItem = order => order.price * order.count;
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
@@ -63,7 +64,6 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     const addToOrder = () => {
         setOrders([...orders, order]);
         setOpenItem(null);
-        console.log('orders: ', order);
     }
 
     const Total = styled.span`

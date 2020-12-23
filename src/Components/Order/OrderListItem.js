@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import trash from '../../img/trash.svg';
-import { totalPriceItem } from "../Modal/modalItem";
+import { totalPriceItem } from "../Functions/totalPriceItem";
 import { toLocal } from "../Functions/ToLocal";
 
 const TrashButton = styled.button`
@@ -37,6 +37,7 @@ const Quantity = styled.span`
 `;
 
 export const OrderListItem = ({ order }) => {
+    
     return(
         <ItemStyled>
             <NameStyle>{order.name}</NameStyle>

@@ -20,9 +20,11 @@ const Button = styled.input`
 const Quantity = styled.input`
     width: 15%;
     font-family: 'Bebas Neue', sans-serif;
+    text-align: center;
 `;
 
 export function CountItem({count, setCount, onChange}){
+    //console.log('Number(count): ', count);
     return(
         <CountWrap>
             <Button type="button" disabled={count <= 1} onClick={() => setCount(count-1)} value="-"></Button>

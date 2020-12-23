@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { OrderListItem } from './OrderListItem';
 import { Button } from './orderButton';
-import { totalPriceItem } from "../Modal/modalItem";
+import { totalPriceItem} from "../Functions/totalPriceItem";
 import { toLocal } from "../Functions/ToLocal";
 
 const OrderWrap = styled.div`
@@ -55,8 +55,11 @@ const Empty = styled.p`
     padding: 15px;
 `;
 
+
 export const Order = ({ orders }) => {
-    const total = orders.reduce((result, order) => totalPriceItem(order) + result,0)
+    const total = orders.reduce((result, order) => totalPriceItem(order) + result,0);
+    const singleQty = orders.map(order => order.count).reduce((partial_sum, a) => partial_sum + a,0);
+
     return(
         <>
             <OrderWrap>
@@ -71,7 +74,7 @@ export const Order = ({ orders }) => {
                 </OrderContent>
                 <div className="togglerButton"></div>
                 <OrderBottom>
-                    <Total>Quantity: {orders.length}</Total>
+                    <Total>Quantity: {singleQty}</Total>
                     <Total>Total: {toLocal(total)}</Total>
                     <Button></Button>
                 </OrderBottom>
