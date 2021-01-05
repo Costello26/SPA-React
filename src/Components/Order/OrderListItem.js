@@ -42,15 +42,14 @@ const Toppings = styled.div`
     font-size: 14px;
 `;
 
-export const OrderListItem = ({ order }) => {
-    const toppings = order.topping.filter(item => item.checked).map(item => ' ' + item.name ).join(', '); 
-    console.log( order.topping.filter(item => item.checked));
+export const OrderListItem = ({ order, index, deleteItem }) => {
+    const toppings = order.topping.filter(item => item.checked).map(item => ' ' + item.name ).join(', ');
     return(
         <ItemStyled>
-            <NameStyle>{order.name}</NameStyle>
+            <NameStyle>{order.choice ? order.choice : order.name}</NameStyle>
             <Quantity>{order.count}</Quantity>
             <PriceStyled>{toLocal(totalPriceItem(order))}</PriceStyled>
-            <TrashButton/>
+            <TrashButton onClick={() => deleteItem(index)} />
             {toppings && <Toppings>Топпинги: {toppings}</Toppings>}
         </ItemStyled>
     )

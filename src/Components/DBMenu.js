@@ -44,7 +44,7 @@ const dbMenu = {
 	],
 	other: [
 		{
-			name: 'Cola',
+			name: 'Soda',
 			img: '/menu/soda.png',
 			id: 1,
 			price: 50,
@@ -71,7 +71,7 @@ const dbMenu = {
 			choices: ['Филе', 'Крылья'],
 		},
 		{
-			name: 'Americano',
+			name: 'Coffee',
 			img: '/menu/coffee.png',
 			id: 5,
 			price: 150,

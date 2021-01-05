@@ -18,12 +18,20 @@ const OrderButton = styled.a`
         background-color: #fff;
         border: 2px solid #000;
     }
+    &.disabled{
+        pointer-events: none;
+        cursor: no-drop;
+        background-color: #444;
+        border-color: #444;
+    }
 `;
+
+
 const defaultText = `Заказать`;
 
-export const Button = ({onClick, text}) => {
+export const Button = ({onClick, text, choices}) => {
     return(
-        <OrderButton onClick={onClick} href="##">
+        <OrderButton onClick={onClick} className={ choices ? 'disabled' : null } href="##">
             { text ? text : defaultText }
         </OrderButton>
     )

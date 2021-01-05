@@ -56,7 +56,12 @@ const Empty = styled.p`
 `;
 
 
-export const Order = ({ orders }) => {
+export const Order = ({ orders, setOrders }) => {
+    const deleteItem = index => {
+        const newOrders = [...orders];
+        newOrders.splice(index, 1);
+        setOrders(newOrders);
+    }
     const total = orders.reduce((result, order) => totalPriceItem(order) + result,0);
     const singleQty = orders.map(order => order.count).reduce((partial_sum, a) => partial_sum + a,0);
 
@@ -67,7 +72,7 @@ export const Order = ({ orders }) => {
                 <OrderContent>
                     { orders.length ? 
                     <OrderList>
-                        {orders.map(order => <OrderListItem order={order} key={order.id}/>)}
+                        {orders.map((order, index) => <OrderListItem deleteItem={deleteItem} order={order} {...orders} key={index} index={index}/>)}
                     </OrderList>
                     :
                     <Empty>Корзина пуста!</Empty> }
