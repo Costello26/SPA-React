@@ -22,6 +22,7 @@ const ItemStyled = styled.li`
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
+    cursor: pointer;
 `;
 
 const PriceStyled = styled.span`
