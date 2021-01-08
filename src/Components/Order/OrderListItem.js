@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import trash from '../../img/trash.svg';
 import { totalPriceItem } from "../Functions/totalPriceItem";
@@ -42,14 +42,15 @@ const Toppings = styled.div`
     font-size: 14px;
 `;
 
-export const OrderListItem = ({ order, index, deleteItem }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
     const toppings = order.topping.filter(item => item.checked).map(item => ' ' + item.name ).join(', ');
+    const refDeleteButton = useRef(null);
     return(
-        <ItemStyled>
+        <ItemStyled onClick={(e) => e.target !== refDeleteButton.current && setOpenItem({...order, index})}>
             <NameStyle>{order.choice ? order.choice : order.name}</NameStyle>
             <Quantity>{order.count}</Quantity>
             <PriceStyled>{toLocal(totalPriceItem(order))}</PriceStyled>
-            <TrashButton onClick={() => deleteItem(index)} />
+            <TrashButton ref={refDeleteButton} className="delete" onClick={() => deleteItem(index)} />
             {toppings && <Toppings>Топпинги: {toppings}</Toppings>}
         </ItemStyled>
     )

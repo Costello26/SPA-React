@@ -58,9 +58,10 @@ const Total = styled.span`
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders, }) => {
 
-    const counter = useCount();
+    const counter = useCount(openItem.count);
     const toppings = useToppings(openItem);
     const choices = useChoices(openItem);
+    const isEdit = openItem.index > -1;
 
     const closeModal = e => {
         if(e.target.id === 'Overlay'){
@@ -73,6 +74,13 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders, }) => {
         count: counter.count,
         topping: toppings.toppings,
         choice: choices.choice,
+    }
+
+    const editOrder = () => {
+        const newOrders = [...orders];
+        newOrders[openItem.index] = order;
+        setOrders(newOrders);
+        setOpenItem(null);
     }
 
     const addToOrder = () => {
@@ -89,7 +97,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders, }) => {
                     {openItem.choices && <Choices {...choices} openItem={openItem}></Choices> }
                     <Price>{toLocal(openItem.price)}</Price>
                     <CountItem {...counter}></CountItem>
-                    <Button onClick={addToOrder} text="В корзину" choices={order.choices && !order.choice}></Button>
+                    <Button onClick={isEdit ? editOrder : addToOrder} text="В корзину" choices={order.choices && !order.choice}></Button>
                     <Total>Total: {toLocal(totalPriceItem(order))}</Total>
                 </BannerContent>
             </ModalBody>

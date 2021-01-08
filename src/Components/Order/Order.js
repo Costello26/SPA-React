@@ -56,7 +56,7 @@ const Empty = styled.p`
 `;
 
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
     const deleteItem = index => {
         const newOrders = [...orders];
         newOrders.splice(index, 1);
@@ -72,7 +72,8 @@ export const Order = ({ orders, setOrders }) => {
                 <OrderContent>
                     { orders.length ? 
                     <OrderList>
-                        {orders.map((order, index) => <OrderListItem deleteItem={deleteItem} order={order} {...orders} key={index} index={index}/>)}
+                        {orders.map((order, index) => <OrderListItem deleteItem={deleteItem} order={order} 
+                        {...orders} key={index} index={index} setOpenItem={setOpenItem}/>)}
                     </OrderList>
                     :
                     <Empty>Корзина пуста!</Empty> }
