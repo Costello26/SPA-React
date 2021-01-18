@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { OrderListItem } from './OrderListItem';
 import { Button } from './orderButton';
-import { totalPriceItem} from "../Functions/totalPriceItem";
+import { totalPriceItem } from "../Functions/totalPriceItem";
 import { toLocal } from "../Functions/ToLocal";
+import { Context } from '../Functions/Context';
 
 const OrderWrap = styled.div`
     background-color: #fff;
@@ -21,7 +22,7 @@ const OrderWrap = styled.div`
     box-shadow: 0px 0px 21px 1px rgba(81, 81, 81, 0.33);
 `;
 
-const HeadingOrder = styled.h2`
+export const HeadingOrder = styled.h2`
     font-size: 2em;
     text-align: center;
     padding-top: 1em;
@@ -34,7 +35,7 @@ const OrderContent = styled.div`
 
 const OrderList = styled.ul``;
 
-const Total = styled.span`
+export const Total = styled.span`
     width: 100%;
     display: block;
     padding: 5px 0px;
@@ -56,13 +57,22 @@ const Empty = styled.p`
 `;
 
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+export const Order = () => {
+    const {
+        auth: { authentication, logIn},
+        orders: { orders, setOrders },
+        orderConfirm: { setOpenOrderConfirm }
+    } = useContext(Context);
+
+
     const deleteItem = index => {
         const newOrders = [...orders];
         newOrders.splice(index, 1);
         setOrders(newOrders);
     }
+
     const total = orders.reduce((result, order) => totalPriceItem(order) + result,0);
+
     const singleQty = orders.map(order => order.count).reduce((partial_sum, a) => partial_sum + a,0);
 
     return(
@@ -73,17 +83,23 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
                     { orders.length ? 
                     <OrderList>
                         {orders.map((order, index) => <OrderListItem deleteItem={deleteItem} order={order} 
-                        {...orders} key={index} index={index} setOpenItem={setOpenItem}/>)}
+                        {...orders} key={index} index={index}/>)}
                     </OrderList>
                     :
                     <Empty>Корзина пуста!</Empty> }
                 </OrderContent>
                 <div className="togglerButton"></div>
-                <OrderBottom>
-                    <Total>Quantity: {singleQty}</Total>
-                    <Total>Total: {toLocal(total)}</Total>
-                    <Button></Button>
-                </OrderBottom>
+                { orders.length ?
+                    <>
+                        <OrderBottom>
+                        <Total>Quantity: {singleQty}</Total>
+                        <Total>Total: {toLocal(total)}</Total>
+                        <Button onClick={() => authentication ? setOpenOrderConfirm(true) : logIn() }></Button>
+                        </OrderBottom>
+                    </> 
+                    :
+                    null
+                }
             </OrderWrap>
         </>
     )

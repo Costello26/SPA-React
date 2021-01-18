@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import styled from 'styled-components';
 import trash from '../../img/trash.svg';
 import { totalPriceItem } from "../Functions/totalPriceItem";
 import { toLocal } from "../Functions/ToLocal";
+import { Context } from '../Functions/Context';
 
 const TrashButton = styled.button`
     width: 20px;
@@ -43,7 +44,10 @@ const Toppings = styled.div`
     font-size: 14px;
 `;
 
-export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
+export const OrderListItem = ({ order, index, deleteItem }) => {
+    const {
+        openItem: { setOpenItem }
+    } = useContext(Context);
     const toppings = order.topping.filter(item => item.checked).map(item => ' ' + item.name ).join(', ');
     const refDeleteButton = useRef(null);
     return(

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { toLocal } from "../Functions/ToLocal";
+import { Context } from '../Functions/Context';
 
 const List = styled.ul`
     display: flex;
@@ -37,15 +38,20 @@ const Item = styled.li`
     }
 `;
 
-export const ListItem = ({ itemList, setOpenItem }) => (
-    <List>
-        {itemList.map(item => (
-            <Item key={item.id} img={item.img} onClick={() => setOpenItem(item)}>
-                <div className="mask">
-                    <span>{item.name}</span>
-                    <span>{toLocal(item.price)}</span> 
-                </div>
-            </Item>
-        ))}
-    </List>
-);
+export const ListItem = ({ itemList }) => {
+    const {
+        openItem: { setOpenItem }
+    } = useContext(Context);
+    return(
+        <List>
+            {itemList.map(item => (
+                <Item key={item.id} img={item.img} onClick={() => {setOpenItem(item)}} title={item.name}>
+                    <div className="mask">
+                        <span>{item.name}</span>
+                        <span>{toLocal(item.price)}</span> 
+                    </div>
+                </Item>
+            ))}
+        </List>
+    )
+};

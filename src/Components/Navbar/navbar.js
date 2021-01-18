@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logoImg from '../../img/dna.svg';
 import userIcon from '../../img/sign.svg';
+import { Context } from '../Functions/Context';
 
 const active = '#eee';
 
@@ -18,7 +19,7 @@ const headerStyles = {
 
 const NavBarStyled = styled.div`
     max-width: 1400px;
-    padding: 10px 0;
+    padding: 10px 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -66,14 +67,22 @@ const LoginButton = styled.button`
     }
 `;
 
-export const NavBar = () => (
-    <header style={headerStyles}>
-        <NavBarStyled>
-            <LogoLink href="##">
-                <LogoStyled src={logoImg} alt="logo"/>
-                <h1>STATION 21</h1>
-            </LogoLink>
-            <LoginButton>Log in <img src={userIcon} alt="log in"/></LoginButton>
-        </NavBarStyled>
-    </header>
-)
+export const NavBar = () => {
+    const {auth: {authentication, logIn, logOut} } = useContext(Context);
+    return(
+        <header style={headerStyles}>
+            <NavBarStyled>
+                <LogoLink href="##">
+                    <LogoStyled src={logoImg} alt="logo"/>
+                    <h1>STATION 21</h1>
+                </LogoLink>
+                { authentication ? 
+                    <LoginButton onClick={logOut}>{authentication.displayName} <img src={userIcon} alt="Выйти"/></LoginButton>
+                    :
+                    <LoginButton onClick={logIn}>Log in <img src={userIcon} alt="log in"/></LoginButton>
+                }
+                
+            </NavBarStyled>
+        </header>
+    )
+}

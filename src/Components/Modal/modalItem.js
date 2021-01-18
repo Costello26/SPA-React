@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Order/orderButton';
 import { CountItem } from './countItem';
@@ -9,8 +9,9 @@ import { Toppings } from '../Modal/toppings';
 import { Choices } from '../Modal/Choices';
 import { useToppings } from '../Hooks/useToppings';
 import { useChoices } from '../Hooks/useChoices';
+import { Context } from '../Functions/Context';
 
-const Modal = styled.div`
+export const Modal = styled.div`
     position: fixed;
     z-index: 99;
     top: 0;
@@ -24,7 +25,7 @@ const Modal = styled.div`
     align-items: center;
 `;
 
-const ModalBody = styled.div`
+export const ModalBody = styled.div`
     width: 50%;
     max-width: 600px;
     max-height:600px;
@@ -38,7 +39,7 @@ const Banner = styled.div`
     background-size: cover;
 `; 
 
-const BannerContent = styled.div`
+export const BannerContent = styled.div`
     padding: 15px;
     text-align: center;
     font-size: 26px;
@@ -56,7 +57,11 @@ const Total = styled.span`
         padding: 10px 0;
     `;
 
-export const ModalItem = ({ openItem, setOpenItem, orders, setOrders, }) => {
+export const ModalItem = () => {
+    const {
+        openItem: { openItem, setOpenItem},
+        orders: { orders, setOrders }
+    } = useContext(Context);
 
     const counter = useCount(openItem.count);
     const toppings = useToppings(openItem);

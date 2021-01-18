@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import dbMenu from '../DBMenu';
+import loading from '../../img/loading.svg';
 import { ListItem } from './listItem';
+import { Context } from '../Functions/Context';
 
 const MenuStyled = styled.main`
     margin-left: 20%;
@@ -17,15 +18,47 @@ const MenuStyled = styled.main`
     }
 `;
 
-export const Menu = ({ setOpenItem }) => (
-    <MenuStyled>
-        <section>
-            <h2>Burgers</h2>
-            <ListItem itemList={dbMenu.burger} setOpenItem={setOpenItem}/>
-        </section>
-        <section>
-            <h2>Drinks & Snacks</h2>
-            <ListItem itemList={dbMenu.other} setOpenItem={setOpenItem}/>
-        </section>
-    </MenuStyled>
-)
+const LoadingList = styled.div`
+    width: 100%;
+    height: calc(100vh - 210px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+        width: 70px;
+        height: 70px;
+        animation: rotate 3s infinite;
+        @keyframes rotate{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    }
+`;
+
+export const Menu = () => {
+    const { dbMenu } = useContext(Context);
+    return(
+        <MenuStyled>
+            { dbMenu ? 
+            <>
+            <section>
+                <h2>Burgers</h2>
+                <ListItem itemList={dbMenu.burger}/>
+            </section>
+            <section>
+                <h2>Drinks & Snacks</h2>
+                <ListItem itemList={dbMenu.other}/>
+            </section>
+            </> 
+            : 
+            <LoadingList>
+                <img src={loading} alt="Loading"/>
+            </LoadingList>
+            }
+        </MenuStyled>
+    )
+}
